@@ -138,15 +138,6 @@ mbti_data = {
     }
 }
 
-# 알파벳 의미 묶어서 표시
-st.markdown("### 🔠 MBTI 알파벳 설명")
-for pair, letters in mbti_pairs.items():
-    cols = st.columns(2)
-    with cols[0]:
-        st.markdown(letters[list(letters.keys())[0]])
-    with cols[1]:
-        st.markdown(letters[list(letters.keys())[1]])
-st.markdown("---")
 
 mbti_types = sorted(mbti_data.keys())
 user_mbti = st.selectbox("👉 자신의 MBTI를 선택하세요:", options=[""] + mbti_types)

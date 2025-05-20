@@ -18,6 +18,10 @@ mbti_pairs = {
         "J": "🗂️ **J (판단형)**: 계획적이고 체계적인 것을 좋아해요.",
         "P": "🎨 **P (인식형)**: 융통성과 즉흥성을 선호해요."
     }
+}
+
+# --- MBTI 전체 데이터 ---
+mbti_data = {
     "INTJ": {
         "jobs": ["전략기획가", "데이터 과학자", "기술 분석가", "시스템 설계자", "AI 연구원"],
         "similar": "INFJ, ENTJ",
@@ -132,67 +136,6 @@ mbti_pairs = {
     }
 }
 
-# --- MBTI 전체 데이터 ---
-mbti_data = {
-    "INTJ": {
-        "jobs": ["전략기획가", "데이터 과학자", "기술 분석가", "시스템 설계자", "AI 연구원"],
-        "similar": "INFJ, ENTJ",
-        "opposite": "ESFP",
-        "books": ["『이기적 유전자』", "『생각의 기술』"],
-        "movies": ["🎥 인터스텔라", "🎥 소셜 네트워크"]
-    },
-    "INFP": {
-        "jobs": ["소설가", "시인", "상담가", "애니메이터", "UX 디자이너"],
-        "similar": "INFJ, ENFP",
-        "opposite": "ESTJ",
-        "books": ["『어린 왕자』", "『나미야 잡화점의 기적』"],
-        "movies": ["🎥 월플라워", "🎥 인사이드 아웃"]
-    },
-    "ENTP": {
-        "jobs": ["창업가", "마케팅 전문가", "기획자", "디자이너", "기술 혁신가"],
-        "similar": "ENFP, ENTP",
-        "opposite": "ISFJ",
-        "books": ["『제로 투 원』", "『스티브 잡스』"],
-        "movies": ["🎥 인셉션", "🎥 아이언맨"]
-    },
-    "ISFJ": {
-        "jobs": ["간호사", "교사", "사회복지사", "도서관 사서", "행정직"],
-        "similar": "ESFJ, ISTJ",
-        "opposite": "ENTP",
-        "books": ["『비밀의 화원』", "『책 읽어주는 남자』"],
-        "movies": ["🎥 업", "🎥 포레스트 검프"]
-    },
-    "INFJ": {
-        "jobs": ["상담심리사", "작가", "인문학 연구자", "컨텐츠 디렉터", "비영리 단체 활동가"],
-        "similar": "INFP, INTJ",
-        "opposite": "ESTP",
-        "books": ["『모모』", "『데미안』"],
-        "movies": ["🎥 사운드 오브 메탈", "🎥 빅피쉬"]
-    },
-    "ENFP": {
-        "jobs": ["마케터", "기획자", "영상 크리에이터", "스타트업 창업가", "여행 작가"],
-        "similar": "INFP, ENTP",
-        "opposite": "ISTJ",
-        "books": ["『가벼움의 시대』", "『내 안의 너에게』"],
-        "movies": ["🎥 예스맨", "🎥 미드나잇 인 파리"]
-    },
-    "ISTJ": {
-        "jobs": ["회계사", "법무사", "공무원", "데이터 관리자", "품질 관리자"],
-        "similar": "ISFJ, ESTJ",
-        "opposite": "ENFP",
-        "books": ["『원칙』", "『회계의 신』"],
-        "movies": ["🎥 머니볼", "🎥 캐치 미 이프 유 캔"]
-    },
-    "ESFP": {
-        "jobs": ["공연 예술가", "이벤트 기획자", "배우", "유튜버", "브랜드 매니저"],
-        "similar": "ISFP, ESTP",
-        "opposite": "INTJ",
-        "books": ["『파울로 코엘료의 연금술사』"],
-        "movies": ["🎥 라라랜드", "🎥 그레이티스트 쇼맨"]
-    },
-    # 여기에 나머지 8개 MBTI 유형도 동일하게 추가 가능
-}
-
 # --- Streamlit 페이지 설정 ---
 st.set_page_config(page_title="MBTI 성격 추천기", page_icon="🧠")
 
@@ -238,4 +181,4 @@ if user_mbti:
         st.markdown(f"⚠️ {data['opposite']}")
 
     else:
-        st.error("😢 아직 지원하지 않는 MBTI 유형입니다. 전체 유형을 곧 확장할게요!")
+        st.error("😢 아직 지원하지 않는 MBTI 유형입니다. 철자 확인 후 다시 입력해주세요.")

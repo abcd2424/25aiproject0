@@ -1,5 +1,7 @@
 import streamlit as st
 
+# 반드시 이 부분이 가장 먼저 와야 합니다.
+st.set_page_config(page_title="MBTI 성격 추천기", page_icon="🧠")
 # --- MBTI 알파벳 쌍 설명 ---
 mbti_pairs = {
     "E/I": {

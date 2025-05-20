@@ -1,47 +1,6 @@
 import streamlit as st
 
-# --- 다크 모드 스타일 (색 반전) ---
-dark_mode_css = """
-<style>
-/* 배경색과 텍스트 색 반전 */
-body, .css-18e3th9 {
-    background-color: #121212 !important;
-    color: #e0e0e0 !important;
-}
-
-/* 선택박스 배경과 텍스트 */
-div[data-baseweb="select"] > div {
-    background-color: #1e1e1e !important;
-    color: #e0e0e0 !important;
-}
-
-/* 버튼 색상 */
-.stButton > button {
-    background-color: #2d2d2d !important;
-    color: #e0e0e0 !important;
-    border: 1px solid #555 !important;
-}
-
-/* 링크 색상 */
-a {
-    color: #8ab4f8 !important;
-}
-
-/* 구분선 색 */
-hr {
-    border-color: #444 !important;
-}
-
-/* 컬럼내 마진 조정 */
-.css-1d391kg {
-    margin-bottom: 1rem !important;
-}
-</style>
-"""
-
-st.markdown(dark_mode_css, unsafe_allow_html=True)
-
-# --- 기존 MBTI 코드 (정리된 버전) ---
+# --- MBTI 알파벳 쌍 설명 ---
 mbti_pairs = {
     "E/I": {
         "E": "🌟 **E (외향형)**: 사람들과 어울릴 때 에너지를 얻어요.",
@@ -61,6 +20,7 @@ mbti_pairs = {
     }
 }
 
+# --- MBTI 유형별 데이터 ---
 mbti_data = {
     "INTJ": {
         "jobs": ["전략기획가", "데이터 과학자", "기술 분석가", "시스템 설계자", "AI 연구원"],
@@ -69,7 +29,6 @@ mbti_data = {
         "books": ["『이기적 유전자』", "『생각의 기술』"],
         "movies": ["🎥 인터스텔라", "🎥 소셜 네트워크"]
     },
-    # ... (중략: 나머지 MBTI 데이터 동일)
     "INFP": {
         "jobs": ["소설가", "시인", "상담가", "애니메이터", "UX 디자이너"],
         "similar": "INFJ, ENFP",
@@ -77,14 +36,113 @@ mbti_data = {
         "books": ["『어린 왕자』", "『나미야 잡화점의 기적』"],
         "movies": ["🎥 월플라워", "🎥 인사이드 아웃"]
     },
-    # 여기부터 아래 모든 MBTI 유형 데이터 다 넣으시면 됩니다.
+    "ENTP": {
+        "jobs": ["창업가", "마케팅 전문가", "기획자", "디자이너", "기술 혁신가"],
+        "similar": "ENFP, ENTP",
+        "opposite": "ISFJ",
+        "books": ["『제로 투 원』", "『스티브 잡스』"],
+        "movies": ["🎥 인셉션", "🎥 아이언맨"]
+    },
+    "ISFJ": {
+        "jobs": ["간호사", "교사", "사회복지사", "도서관 사서", "행정직"],
+        "similar": "ESFJ, ISTJ",
+        "opposite": "ENTP",
+        "books": ["『비밀의 화원』", "『책 읽어주는 남자』"],
+        "movies": ["🎥 업", "🎥 포레스트 검프"]
+    },
+    "INFJ": {
+        "jobs": ["상담심리사", "작가", "인문학 연구자", "컨텐츠 디렉터", "비영리 단체 활동가"],
+        "similar": "INFP, INTJ",
+        "opposite": "ESTP",
+        "books": ["『모모』", "『데미안』"],
+        "movies": ["🎥 사운드 오브 메탈", "🎥 빅피쉬"]
+    },
+    "ENFP": {
+        "jobs": ["마케터", "기획자", "영상 크리에이터", "스타트업 창업가", "여행 작가"],
+        "similar": "INFP, ENTP",
+        "opposite": "ISTJ",
+        "books": ["『가벼움의 시대』", "『내 안의 너에게』"],
+        "movies": ["🎥 예스맨", "🎥 미드나잇 인 파리"]
+    },
+    "ISTJ": {
+        "jobs": ["회계사", "법무사", "공무원", "데이터 관리자", "품질 관리자"],
+        "similar": "ISFJ, ESTJ",
+        "opposite": "ENFP",
+        "books": ["『원칙』", "『회계의 신』"],
+        "movies": ["🎥 머니볼", "🎥 캐치 미 이프 유 캔"]
+    },
+    "ESFP": {
+        "jobs": ["공연 예술가", "이벤트 기획자", "배우", "유튜버", "브랜드 매니저"],
+        "similar": "ISFP, ESTP",
+        "opposite": "INTJ",
+        "books": ["『파울로 코엘료의 연금술사』"],
+        "movies": ["🎥 라라랜드", "🎥 그레이티스트 쇼맨"]
+    },
+    "ESTP": {
+        "jobs": ["기업 영업", "스포츠 트레이너", "경찰관", "스타트업 운영자", "모험 여행 가이드"],
+        "similar": "ISTP, ESTP",
+        "opposite": "INFJ",
+        "books": ["『무조건 달려』"],
+        "movies": ["🎥 분노의 질주", "🎥 미션 임파서블"]
+    },
+    "ISFP": {
+        "jobs": ["그래픽 디자이너", "사진작가", "물리치료사", "조용한 예술가", "반려동물 훈련사"],
+        "similar": "INFP, ESFP",
+        "opposite": "ENTJ",
+        "books": ["『나의 라임 오렌지 나무』", "『보노보노처럼 살다니 다행이야』"],
+        "movies": ["🎥 리틀 포레스트", "🎥 허(Her)"]
+    },
+    "ENTJ": {
+        "jobs": ["CEO", "전략 컨설턴트", "벤처 투자자", "정치 분석가", "경영 지도자"],
+        "similar": "INTJ, ESTJ",
+        "opposite": "ISFP",
+        "books": ["『그로우』", "『하드씽』"],
+        "movies": ["🎥 울프 오브 월스트리트", "🎥 글래디에이터"]
+    },
+    "ESTJ": {
+        "jobs": ["프로젝트 매니저", "군 간부", "경영자", "행정 공무원", "공장 관리자"],
+        "similar": "ISTJ, ENTJ",
+        "opposite": "INFP",
+        "books": ["『철학은 어떻게 삶의 무기가 되는가』"],
+        "movies": ["🎥 체르노빌", "🎥 설국열차"]
+    },
+    "ENFJ": {
+        "jobs": ["심리상담가", "강연가", "학교 교사", "비전 리더", "HR 전문가"],
+        "similar": "INFJ, ENFP",
+        "opposite": "ISTP",
+        "books": ["『말의 품격』", "『사람은 왜 모여 살까』"],
+        "movies": ["🎥 굿 윌 헌팅", "🎥 원더"]
+    },
+    "ISTP": {
+        "jobs": ["기계 기술자", "소방관", "비행기 정비사", "엔지니어", "오토바이 수리사"],
+        "similar": "ESTP, INTP",
+        "opposite": "ENFJ",
+        "books": ["『닥치고 공작소』"],
+        "movies": ["🎥 매드 맥스", "🎥 본 아이덴티티"]
+    },
+    "ESFJ": {
+        "jobs": ["초등교사", "서비스 매니저", "이벤트 코디네이터", "간호조무사", "케어매니저"],
+        "similar": "ISFJ, ENFJ",
+        "opposite": "INTP",
+        "books": ["『선량한 차별주의자』"],
+        "movies": ["🎥 인턴", "🎥 굿닥터"]
+    },
+    "INTP": {
+        "jobs": ["프로그래머", "이론 과학자", "철학자", "시스템 개발자", "AI 윤리 연구자"],
+        "similar": "ISTP, ENTP",
+        "opposite": "ESFJ",
+        "books": ["『코스모스』", "『프로그래머, 수학을 만나다』"],
+        "movies": ["🎥 어벤져스: 에이지 오브 울트론", "🎥 굿 윌 헌팅"]
+    }
 }
 
-st.set_page_config(page_title="MBTI 성격 추천기 (다크모드)", page_icon="🧠")
+# --- Streamlit 페이지 설정 ---
+st.set_page_config(page_title="MBTI 성격 추천기", page_icon="🧠")
 
-st.title("💼 MBTI 기반 성격 & 직업 추천기 (다크모드)")
+st.title("💼 MBTI 기반 성격 & 직업 추천기")
 st.markdown("MBTI를 선택하면 성격 분석과 어울리는 직업, 추천 책/영화, 유사 MBTI까지 알려드려요!")
 
+# 알파벳 의미 묶어서 표시
 st.markdown("### 🔠 MBTI 알파벳 설명")
 for pair, letters in mbti_pairs.items():
     cols = st.columns(2)
@@ -100,7 +158,6 @@ user_mbti = st.selectbox("👉 자신의 MBTI를 선택하세요:", options=[""]
 if user_mbti:
     data = mbti_data[user_mbti]
     st.success(f"🔍 {user_mbti} 유형 분석 결과입니다!")
-    st.snow()
 
     st.subheader("💼 어울리는 직업")
     for job in data["jobs"]:

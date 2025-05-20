@@ -138,8 +138,6 @@ mbti_data = {
     }
 }
 
-# --- Streamlit 페이지 설정 ---
-st.set_page_config(page_title="MBTI 성격 추천기", page_icon="🧠")
 
 st.title("💼 MBTI 기반 성격 & 직업 추천기")
 st.markdown("MBTI를 선택하면 성격 분석과 어울리는 직업, 추천 책/영화, 유사 MBTI까지 알려드려요!")
